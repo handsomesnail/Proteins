@@ -1,8 +1,8 @@
 {
     "name": "PolymerModel",
-    "references": [],
-    "optionalUnityReferences": [],
+    "references": [
+        "Util"
+    ],
     "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "excludePlatforms": []
 }

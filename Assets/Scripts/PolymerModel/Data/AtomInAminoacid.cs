@@ -10,9 +10,9 @@ namespace PolymerModel.Data {
     public class AtomInAminoacid {
 
         /// <summary>所属氨基酸</summary>
-        public Aminoacid Aminoacid { get; set; }
+        public Aminoacid Aminoacid { get; internal set; }
 
-        /// <summary>在该氨基酸中的名字</summary>
+        /// <summary>在该氨基酸中的名字(ATOM[13-16])</summary>
         public string Name { get; private set; }
 
         /// <summary>所属原子类型</summary>

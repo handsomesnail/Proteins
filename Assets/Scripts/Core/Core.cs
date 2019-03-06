@@ -26,7 +26,17 @@ namespace ZCore {
         Exception,
     }
 
-    /// <summary>框架核心，大部分函数仅框架层代码可访问</summary>
+    public static class CoreAPI {
+        public static void SendCommand<TModule>(Command cmd) where TModule : Module, new() {
+            Core.SendCommand<TModule>(cmd);
+        }
+        public static object PostCommand<TModule>(Command cmd) where TModule : Module, new() {
+            return Core.PostCommand<TModule>(cmd);
+        }
+        //TODO: 异步的带回调函数的发送指令
+    }
+
+    /// <summary>框架核心，仅框架层代码可访问</summary>
     internal static class Core {
 
         /// <summary>保持模块实例的引用</summary>
@@ -70,7 +80,7 @@ namespace ZCore {
             //调用对应Module下的实例的OnxxxxCommand函数
             Type moduleType = typeof(TModule);
             TModule module = GetModule<TModule>();
-            MethodInfo methodInfo = moduleType.GetMethod(string.Format("On{0}", cmd.GetType().Name), BindingFlags.Public);
+            MethodInfo methodInfo = moduleType.GetMethod(string.Format("On{0}", cmd.GetType().Name), BindingFlags.Public | BindingFlags.Instance);
             if (methodInfo == null) {
                 throw new CoreException(string.Format("[Core.PostCommand]Unhandled Command : {0} for {1}", cmd.GetType().Name, module.GetType().Name));
             }

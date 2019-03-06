@@ -269,23 +269,23 @@ namespace Util {
             }
             throw new SelectFileException(SelectFileError.Cancel);
 #elif UNITY_WSA_10_0 && !UNITY_EDITOR
-        FileOpenPicker picker = new FileOpenPicker {
-            SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
-            ViewMode = PickerViewMode.Thumbnail
-        };
-        picker.FileTypeFilter.Add(".pdb");
-        StorageFile file = await picker.PickSingleFileAsync();
-        if (file != null) {
-            ulong size = (await file.GetBasicPropertiesAsync()).Size;//字节大小
-            if (size > MAX_FILE_SIZE) {
-                throw new SelectFileException(SelectFileError.OverSize);
+            FileOpenPicker picker = new FileOpenPicker {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
+                ViewMode = PickerViewMode.Thumbnail
+            };
+            picker.FileTypeFilter.Add(".pdb");
+            StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null) {
+                ulong size = (await file.GetBasicPropertiesAsync()).Size;//字节大小
+                if (size > MAX_FILE_SIZE) {
+                    throw new SelectFileException(SelectFileError.OverSize);
+                }
+                else {
+                    string text = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                    return Encoding.UTF8.GetBytes(text);
+                }
             }
-            else {
-                string text = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
-                return Encoding.UTF8.GetBytes(text);
-            }
-        }
-        else throw new SelectFileException(SelectFileError.Cancel);
+            else throw new SelectFileException(SelectFileError.Cancel);
 #endif
             throw new NotImplementedException(string.Format("[IOUtil.PickFile]Implemented Platform:{0}", Application.platform.ToString()));
         }

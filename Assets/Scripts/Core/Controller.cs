@@ -9,6 +9,8 @@ namespace ZCore {
     /// <summary>处理交互 变更Model数据的同时更新View</summary>
     public class Controller : MonoBehaviour {
 
+        protected virtual void Start() { }
+
         protected TModel GetModel<TModel>() where TModel : Model, new() {
             Type modelType = typeof(TModel);
             if (this.GetModuleName() != Core.GetModuleName(modelType, CoreType.Model)) {

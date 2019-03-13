@@ -8,9 +8,6 @@ namespace PolymerModel.Data {
     /// <summary>蛋白质中的残基实例</summary>
     public class AminoacidInProtein {
 
-        /// <summary>该残基所属蛋白质</summary>
-        //public Protein Protein { get; internal set; }
-
         public Chain Chain { get; internal set; }
 
         /// <summary>所属链的ID(ATOM[22])</summary>
@@ -54,6 +51,10 @@ namespace PolymerModel.Data {
 
         public override int GetHashCode() {
             return this.Chain.Protein.GetHashCode() + ChainId.GetHashCode() + ResidueSeq.GetHashCode();
+        }
+
+        public override string ToString() {
+            return string.Format("{0}-{1}-{2}", Chain.Protein.ID, ChainId, ResidueSeq);
         }
 
     }

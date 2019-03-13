@@ -7,6 +7,15 @@ using Util;
 using PolymerModel.Data;
 using System;
 
+/*
+蛋白质从上至下的数据层次结构划分为：蛋白质-链-残基-原子
+分别对应数据类型：Protein-Chain-AminoacidInProtein-AtomInAminoacid
+以上四种数据类型只有在某个蛋白质内才有确切含义
+而由于构成蛋白质的氨基酸种类和原子种类个数是一定的，为了防止在残基层和原子层构造大量重复数据的对象
+就有了Aminoacid和Atom两个类，表示氨基酸和原子独立于蛋白质之外的本身的性质，每种只构造一个对象
+AminoacidInProtein持有对应Aminoacid对象的引用，AtomInAminoacid持有对应Atom对象的引用
+*/
+
 namespace PolymerModel {
 
     internal class PolymerModelException : Exception {

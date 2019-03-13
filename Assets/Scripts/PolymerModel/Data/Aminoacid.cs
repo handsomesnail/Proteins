@@ -11,7 +11,7 @@ namespace PolymerModel.Data {
         Double = 2,
     }
 
-    /// <summary>氨基酸残基</summary>
+    /// <summary>氨基酸标准残基</summary>
     public class Aminoacid {
 
         internal static Dictionary<AminoacidType, Aminoacid> Aminoacids;
@@ -39,7 +39,7 @@ namespace PolymerModel.Data {
         }
 
         /// <summary>原子间的化学键连接</summary>
-        public ReadOnlyDictionary<KeyValuePair<AtomInAminoacid, AtomInAminoacid>, BondType> Connection { get; private set; }
+        public ReadOnlyDictionary<KeyValuePair<AtomInAminoacid, AtomInAminoacid>, BondType> Connections { get; private set; }
 
         static Aminoacid() {
             Aminoacids = new Dictionary<AminoacidType, Aminoacid>();
@@ -74,7 +74,7 @@ namespace PolymerModel.Data {
             foreach (var child in connection) {
                 connectDic.Add(new KeyValuePair<AtomInAminoacid, AtomInAminoacid>(this[child.Key.Key], this[child.Key.Value]), child.Value);
             }
-            Connection = new ReadOnlyDictionary<KeyValuePair<AtomInAminoacid, AtomInAminoacid>, BondType>(connectDic);
+            Connections = new ReadOnlyDictionary<KeyValuePair<AtomInAminoacid, AtomInAminoacid>, BondType>(connectDic);
         }
 
         public override bool Equals(object obj) {

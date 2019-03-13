@@ -6,7 +6,7 @@ using ZCore;
 public class ProteinDisplayModule : Module {
 
     public void OnShowProteinCommand(ShowProteinCommand cmd) {
-        //TODO: 展示蛋白质可视化内容
+        GetController<ProteinDisplayController>().ShowProtein();
     }
 
 }

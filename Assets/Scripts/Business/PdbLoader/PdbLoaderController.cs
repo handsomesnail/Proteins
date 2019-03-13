@@ -1,25 +1,47 @@
 ﻿using PolymerModel.Data;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 using Util;
 using ZCore;
 
 public class PdbLoaderController : Controller {
 
-    protected override void Start() {
-        base.Start();
-    }
-
     public Protein GetProteinData() {
         return GetModel<PdbLoaderModel>().ProteinData;
     }
 
-    public async void LoadLocalPdbFile() {
+    /// <summary>从本地加载PDB文件</summary>
+    public async void LoadLocalPdbFileAsync(Action completeCallback) {
         byte[] data = await IOUtil.PickFile();
-        using(StringReader sr = new StringReader(Encoding.UTF8.GetString(data))) {
+        ParsePdbData(data);
+        completeCallback?.Invoke();
+    }
+
+    /// <summary>从网络加载PDB文件 </summary>
+    public void LoadNetworkPdbFile(string IDCode, Action completeCallback) {
+        PdbLoaderService service = GetService<PdbLoaderService>();
+        StartCoroutine(service.DownloadPdbFile(
+            IDCode, 
+            (response) => {
+                if (response.ErrorCode == 0) {
+                    ParsePdbData(response.ResponseData);
+                    completeCallback?.Invoke();
+                }
+            },
+            (value) => {
+                Debug.Log(value);
+            }
+        ));
+    }
+
+    /// <summary>解析Pdb文件数据</summary>
+    private void ParsePdbData(byte[] data) {
+        using (StringReader sr = new StringReader(Encoding.UTF8.GetString(data))) {
             string record = null;//当前读取的记录
 
             //蛋白质作用域***********/
@@ -27,12 +49,15 @@ public class PdbLoaderController : Controller {
             string classification = null;
             string publishDate = null;
             Dictionary<string, Chain> chains = new Dictionary<string, Chain>();
+            Vector3 minPos = Vector3.zero;
+            Vector3 maxPos = Vector3.zero; 
+            Vector3 centerPos = Vector3.zero;
             //*************************/
 
             //肽链作用域*************/
+            OXTAtom oxt = null;
             Dictionary<int, AminoacidInProtein> seqAminoacids = new Dictionary<int, AminoacidInProtein>();
             //*************************/
-
 
             //氨基酸作用域***********/
             char altloc = ' ';
@@ -49,7 +74,7 @@ public class PdbLoaderController : Controller {
             while ((record = sr.ReadLine()) != null) {
                 //原子作用域
                 string title = record.Substring(0, 6);
-                if(title.StartsWith("HEADER")) {
+                if (title.StartsWith("HEADER")) {
                     classification = record.Substring(10, 40).Trim();//11-50
                     publishDate = record.Substring(50, 9);//51-59
                     id = record.Substring(62, 4);//63-66
@@ -85,8 +110,17 @@ public class PdbLoaderController : Controller {
                     float y = float.Parse(record.Substring(38, 8).Trim()); //39-46
                     float z = float.Parse(record.Substring(46, 8).Trim()); //47-54
                     Vector3 pos = new Vector3(x, y, z);
-                    atomInAminoacidPos.Add(Aminoacid.Generate(resName)[atomName], pos);
-                    atomInAminoacidSerial.Add(Aminoacid.Generate(resName)[atomName], atomSerial);
+                    if (minPos == Vector3.zero) { minPos = pos; }
+                    if(maxPos == Vector3.zero) { maxPos = pos; }
+                    if (x > maxPos.x) maxPos.x = x; if (y > maxPos.y) maxPos.y = y; if (z > maxPos.z) maxPos.z = z;
+                    if (x < minPos.x) minPos.x = x; if (y < minPos.y) minPos.y = y; if (z < minPos.z) minPos.z = z;
+                    if (atomName == "OXT") {
+                        oxt = new OXTAtom(atomSerial, pos);
+                    }
+                    else {
+                        atomInAminoacidPos.Add(Aminoacid.Generate(resName)[atomName], pos);
+                        atomInAminoacidSerial.Add(Aminoacid.Generate(resName)[atomName], atomSerial);
+                    }
                 }
                 else if (title.StartsWith("TER")) { //链结束
                     //氨基酸残基结算
@@ -94,23 +128,27 @@ public class PdbLoaderController : Controller {
                     currentAminoacidInProtein = new AminoacidInProtein(altloc, resName, chainId, residueSeq, atomInAminoacidPos, atomInAminoacidSerial);
                     seqAminoacids.Add(residueSeq, currentAminoacidInProtein);
                     atomInAminoacidPos = new Dictionary<AtomInAminoacid, Vector3>();
+                    atomInAminoacidSerial = new Dictionary<AtomInAminoacid, int>();
                     completeLastAminoacid = true;
 
                     //肽链结算
-                    Chain chain = new Chain(chainId, seqAminoacids);
+                    Chain chain = new Chain(chainId, seqAminoacids, oxt);
+                    oxt = null;
                     seqAminoacids = new Dictionary<int, AminoacidInProtein>();
                     chains.Add(chain.ID, chain);
                 }
                 else if (title.StartsWith("HETATM")) { //非标准残基
 
                 }
+                else if (title.StartsWith("CONECT")) { //非标准残基间的原子连接关系
+
+                }
             }
-
-            Protein protein = new Protein(id, classification, publishDate, chains);
+            centerPos = new Vector3((minPos.x + maxPos.x) / 2, (minPos.y + maxPos.y) / 2, (minPos.z + maxPos.z) / 2);
+            Protein protein = new Protein(id, classification, publishDate, chains, centerPos);
             GetModel<PdbLoaderModel>().ProteinData = protein;
-            Debug.Log(protein);
+            Debug.Log("读取pdb完成");
         }
-
     }
 
 }

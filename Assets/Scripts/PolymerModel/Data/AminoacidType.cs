@@ -25,8 +25,6 @@ namespace PolymerModel.Data {
         TRP,//色氨酸 W
         TYR,//酪氨酸 Y
         VAL,//缬氨酸V
-            /*******************/
-        HOH,//水分子
     }
 
 }

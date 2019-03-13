@@ -20,13 +20,17 @@ namespace PolymerModel.Data {
         /// <summary>链序列(链内为标准残基序列)</summary>
         public ReadOnlyDictionary<string, Chain> Chains { get; private set; }
 
+        /// <summary>蛋白质坐标中心</summary>
+        public Vector3 CenterPos { get; set; }
+
         //TODO: 非标准残基等其它信息
 
         //读取文件 传入相应参数 构造一个蛋白质对象
-        public Protein(string id, string classification,  string publishDate, IDictionary<string, Chain> chains) {
+        public Protein(string id, string classification,  string publishDate, IDictionary<string, Chain> chains, Vector3 centerPos) {
             this.ID = id;
             this.Classification = classification;
             this.PublishDate = publishDate;
+            this.CenterPos = centerPos;
             foreach(var aminoacid in chains) {
                 aminoacid.Value.Protein = this;
             }

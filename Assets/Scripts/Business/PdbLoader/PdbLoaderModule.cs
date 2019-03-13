@@ -8,7 +8,12 @@ public class PdbLoaderModule : Module {
 
     /// <summary>读取本地pdb文件 </summary>
     public void OnLoadLocalPdbFileCommand(LoadLocalPdbFileCommand cmd) {
-        GetController<PdbLoaderController>().LoadLocalPdbFile();
+        GetController<PdbLoaderController>().LoadLocalPdbFileAsync(cmd.CompleteCallback);
+    }
+
+    /// <summary>从网络加载pdb文件 </summary>
+    public void OnLoadNetworkPdbFileCommand(LoadNetworkPdbFileCommand cmd) {
+        GetController<PdbLoaderController>().LoadNetworkPdbFile(cmd.IDCode, cmd.CompleteCallback);
     }
 
     /// <summary>获取当前读取的蛋白质数据</summary>

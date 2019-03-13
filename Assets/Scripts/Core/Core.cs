@@ -195,6 +195,7 @@ namespace ZCore {
                 viewGo.transform.SetParent(viewRoot.transform);
                 view = viewGo.GetComponent<TView>();
                 viewsDic.Add(viewType, view);
+                view.OnCreated();
             }
             return view as TView;
         }

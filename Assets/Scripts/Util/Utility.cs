@@ -8,7 +8,13 @@ using UnityEngine;
 using Windows.UI.ViewManagement;
 #endif
 
-public class Utility {
+public static class Utility {
+
+    private static System.Random random;
+
+    static Utility() {
+        random = new System.Random();
+    }
 
     /// <summary>判断Win10平台下是否为触控</summary>
     public static bool IsWindows10UserInteractionModeTouch {
@@ -37,5 +43,10 @@ public class Utility {
             return SystemInfo.processorCount;
         }
     }
+
+    public static int GetRandomInt() {
+        return random.Next();
+    }
+
 
 }

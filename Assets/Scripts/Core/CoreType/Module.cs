@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ZCore {
 
     /// <summary>模块，作为业务之间通信调用接口</summary>
-    public class Module {
+    public abstract class Module {
 
         protected Controller GetController() {
             string controllerName = string.Format("{0}Controller", this.GetModuleName());

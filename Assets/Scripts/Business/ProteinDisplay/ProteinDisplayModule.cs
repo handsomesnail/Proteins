@@ -9,4 +9,12 @@ public class ProteinDisplayModule : Module {
         GetController<ProteinDisplayController>().ShowProtein();
     }
 
+    public void OnShowDisplayViewCommand(ShowDisplayViewCommand cmd) {
+        GetController<ProteinDisplayController>().ShowDisplayView();
+    }
+
+    public void OnShowInfoInBoardCommand(ShowInfoInBoardCommand cmd) {
+        GetController<ProteinDisplayController>().ShowInfoInBoard(cmd.AtomDisplayer);
+    }
+
 }

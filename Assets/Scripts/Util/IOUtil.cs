@@ -7,8 +7,9 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
+using System.Threading;
 
-#if UNITY_WSA_10_0 && !UNITY_EDITOR
+#if ENABLE_WINMD_SUPPORT
 using Windows.Storage;
 using Windows.Storage.Pickers;
 #endif
@@ -77,7 +78,7 @@ namespace Util {
     /// <summary>文件读写Util</summary>
     public static class IOUtil {
 
-        #region Write&Read
+#region Write&Read
 
         public static void Write(string folderPath, string fileName, string content) {
             string fullPath = folderPath + "/" + fileName;
@@ -124,9 +125,9 @@ namespace Util {
             }
         }
 
-        #endregion
+#endregion
 
-        #region Write&Read(Async)
+#region Write&Read(Async)
 
         public async static Task WriteAsync(string folderPath, string fileName, string content) {
             string fullPath = folderPath + "/" + fileName;
@@ -168,9 +169,9 @@ namespace Util {
             }
         }
 
-        #endregion
+#endregion
 
-        #region PresidentPath
+#region PresidentPath
 
         /// <summary>向PresidentPath路径下写入文本</summary>
         public async static Task WriteInPresidentAsync(string folderPathInPresident, string fileName, string content) {
@@ -209,9 +210,9 @@ namespace Util {
             return ReadBytes(Application.persistentDataPath + folderPathInPresident, fileName);
         }
 
-        #endregion
+#endregion
 
-        #region StreamingAssets
+#region StreamingAssets
 
         /// <summary>从StreamingAssets路径下读取文件的文本 </summary>
         public async static Task<string> ReadInStreamingAssetsAsync(string folderPathInStreamingAssets, string fileName) {
@@ -240,7 +241,7 @@ namespace Util {
             await WriteAsync(Application.streamingAssetsPath + folderPathInStreamingAssets, fileName, content);
         }
 
-        #endregion
+#endregion
 
         /// <summary>所选取pdb文件最大大小(3MB)</summary>
         private const int MAX_FILE_SIZE = 3145728;
@@ -268,13 +269,30 @@ namespace Util {
                 }
             }
             throw new SelectFileException(SelectFileError.Cancel);
-#elif UNITY_WSA_10_0 && !UNITY_EDITOR
+#elif ENABLE_WINMD_SUPPORT
+            StorageFile file = null;
+            bool isCompleteZZZ = false;
+            object syncRoot = new object();
             FileOpenPicker picker = new FileOpenPicker {
                 SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
-                ViewMode = PickerViewMode.Thumbnail
+                ViewMode = PickerViewMode.List,
             };
             picker.FileTypeFilter.Add(".pdb");
-            StorageFile file = await picker.PickSingleFileAsync();
+            UnityEngine.WSA.Application.InvokeOnUIThread(async () => {
+                file = await picker.PickSingleFileAsync();
+                lock (syncRoot) {
+                    isCompleteZZZ = true;
+                }
+            }, true);
+            while (true){
+                lock (syncRoot) {
+                    if (isCompleteZZZ)
+                        break;
+                }
+                await Task.Run(() => {
+                    Thread.Sleep(100);
+                });
+            }
             if (file != null) {
                 ulong size = (await file.GetBasicPropertiesAsync()).Size;//字节大小
                 if (size > MAX_FILE_SIZE) {
@@ -286,8 +304,9 @@ namespace Util {
                 }
             }
             else throw new SelectFileException(SelectFileError.Cancel);
-#endif
+#else
             throw new NotImplementedException(string.Format("[IOUtil.PickFile]Implemented Platform:{0}", Application.platform.ToString()));
+#endif
         }
 
         /// <summary>获取路径下文件的MD5值</summary>

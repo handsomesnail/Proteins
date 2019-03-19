@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ZCore {
 
     /// <summary>持有该模块的数据</summary>
-    public class Model {
+    public abstract class Model {
 
 
 

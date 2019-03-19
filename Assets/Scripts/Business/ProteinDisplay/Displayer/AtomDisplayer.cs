@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZCore;
 
 public class AtomDisplayer : MonoBehaviour {
 
@@ -14,5 +15,14 @@ public class AtomDisplayer : MonoBehaviour {
     public AtomInAminoacid AtomInAminoacid {
         get; set;
     }
+
+    private void OnMouseEnter() {
+        CoreAPI.SendCommand<ProteinDisplayModule, ShowInfoInBoardCommand>(new ShowInfoInBoardCommand(this));
+    }
+
+    private void OnMouseExit() {
+        CoreAPI.SendCommand<ProteinDisplayModule, ShowInfoInBoardCommand>(new ShowInfoInBoardCommand(null));
+    }
+
 
 }

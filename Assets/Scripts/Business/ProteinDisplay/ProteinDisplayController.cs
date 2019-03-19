@@ -9,7 +9,7 @@ public class ProteinDisplayController : Controller {
     /// <summary>显示蛋白质</summary>
     public void ShowProtein() {
         ProteinDisplayModel model = GetModel<ProteinDisplayModel>();
-        Protein protein = CoreAPI.PostCommand<PdbLoaderModule>(new GetProteinDataCommand()) as Protein;
+        Protein protein = CoreAPI.PostCommand<PdbLoaderModule, GetProteinDataCommand, Protein>(new GetProteinDataCommand());
         if (model.DisplayedProteinData != null) {
             if (model.DisplayedProteinData.ID == protein.ID) {
                 return;
@@ -21,10 +21,34 @@ public class ProteinDisplayController : Controller {
         view.ShowProtein(protein);
     }
 
+    public void ShowDisplayView() {
+        ProteinDisplayView view = GetView<ProteinDisplayView>();
+    }
+
+    public void OnSliderChanged(float value) {
+        Debug.Log(value);
+    }
+
+    public void OnBallStickToggleChanged(bool value) {
+        ProteinDisplayModel model = GetModel<ProteinDisplayModel>();
+        ProteinDisplayView view = GetView<ProteinDisplayView>();
+        Protein protein = model.DisplayedProteinData;
+        view.displayMode = value ? DisplayMode.BallStick : DisplayMode.Spacefill;
+        DestroyProtein();
+        view.ShowProtein(protein);
+    }
+
+    public void ShowInfoInBoard(AtomDisplayer atomDisplayer) {
+        ProteinDisplayView view = GetView<ProteinDisplayView>();
+        view.SetBoardInfo(atomDisplayer);
+    }
+
     /// <summary>销毁蛋白质分子模型</summary>
     private void DestroyProtein() {
         ProteinDisplayView view = GetView<ProteinDisplayView>();
         view.DestroyProtein();
     }
+
+
 
 }

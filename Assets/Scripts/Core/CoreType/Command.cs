@@ -5,12 +5,12 @@ using UnityEngine;
 namespace ZCore {
 
     /// <summary>指令</summary>
-    public class Command {
+    public abstract class Command {
 
     }
 
     /// <summary>异步指令</summary>
-    public class AsyncCommand {
+    public abstract class AsyncCommand {
 
     }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ZCore;
 
 public class ProteinDisplayView : View {
@@ -32,6 +33,16 @@ public class ProteinDisplayView : View {
     private GameObject DoubleBondPrefeb;
 
     private Dictionary<AminoacidType, GameObject> AtomPrefebsDic;
+
+    [Header("UIReference")]
+    [SerializeField]
+    private Text proteinInfoText;
+    [SerializeField]
+    private Text chaininInfoText;
+    [SerializeField]
+    private Text aminoacidInfoText;
+    [SerializeField]
+    private Text atomInfoText;
 
     protected override void OnCreated() {
         base.OnCreated();
@@ -110,7 +121,7 @@ public class ProteinDisplayView : View {
                             pos2 = (aminoacidInProtein.AtomInAminoacidPos[connection.Key.Value] - protein.CenterPos) * BallStickPosScale;
                         }
                         catch(KeyNotFoundException ex) {
-                            Debug.LogWarning(string.Format("The aminoacidInProtein: {0} is not complete, the atom in connection: {1}-{2} is losed", aminoacidInProtein, connection.Key.Key.Name, connection.Key.Value.Name));
+                            //Debug.LogWarning(string.Format("The aminoacidInProtein: {0} is not complete, the atom in connection: {1}-{2} is losed", aminoacidInProtein, connection.Key.Key.Name, connection.Key.Value.Name));
                             continue;
                         }
                         BondType bondType = connection.Value;
@@ -122,7 +133,30 @@ public class ProteinDisplayView : View {
             }
         }
     }
-    
+
+    public void SetBoardInfo(AtomDisplayer atomDisplayer) {
+        if(atomDisplayer == null) {
+            proteinInfoText.text = "";
+            chaininInfoText.text = "";
+            aminoacidInfoText.text = "";
+            atomInfoText.text = "";
+            return;
+        }
+        AtomInAminoacid atomInAminoacid = atomDisplayer.AtomInAminoacid;
+        AminoacidInProtein aminoacidInProtein = atomDisplayer.AminoacidInProtein;
+        Chain chain = aminoacidInProtein.Chain;
+        Protein protein = chain.Protein;
+        proteinInfoText.text = string.Format("-Protein-\nID: {0}\nClassification: {1}\nPublishDate: {2}",
+            protein.ID,protein.Classification,protein.PublishDate);
+        chaininInfoText.text = string.Format("-Chain-\nID: {0}\nOXT: {1}",
+            chain.ID, chain.OXT != null);
+        aminoacidInfoText.text = string.Format("-Aminoacid-\nSeq: {0}\nType: {1}\nIsStandard: {2}",
+            aminoacidInProtein.ResidueSeq, aminoacidInProtein.Aminoacid.Type.ToString(), aminoacidInProtein.Aminoacid.IsStandard);
+        atomInfoText.text = string.Format("-Atom-\nName: {0}\nSerial: {1}\nPosition: {2}",
+            atomInAminoacid.Name, aminoacidInProtein.AtomInAminoacidSerial[atomInAminoacid], aminoacidInProtein.AtomInAminoacidPos[atomInAminoacid].ToString("F3"));
+    }
+
+
     public void DestroyProtein() {
         Destroy(Displayer3DRoot.transform.GetChild(0).gameObject);
     }
@@ -152,6 +186,11 @@ public class ProteinDisplayView : View {
         return bondGo;
     }
 
+    [ImplementedInController("OnSliderChanged")]
+    public void OnSliderChanged(float value) { }
+
+    [ImplementedInController("OnBallStickToggleChanged")]
+    public void OnBallStickToggleChanged(bool value) { }
 
 
 }

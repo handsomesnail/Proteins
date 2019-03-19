@@ -26,25 +26,18 @@ namespace ZCore {
         Exception,
     }
 
-    public static class CoreAPI {
-        public static void SendCommand<TModule>(Command cmd) where TModule : Module, new() {
-            Core.SendCommand<TModule>(cmd);
-        }
-        public static object PostCommand<TModule>(Command cmd) where TModule : Module, new() {
-            return Core.PostCommand<TModule>(cmd);
-        }
-        //TODO: 异步的带回调函数的发送指令
-    }
-
     /// <summary>框架核心，仅框架层代码可访问</summary>
     internal static class Core {
 
         /// <summary>保持模块实例的引用</summary>
-        private static readonly Dictionary<Type, Module> modulesDic;
-        private static readonly Dictionary<Type, Controller> controllersDic;
-        private static readonly Dictionary<Type, Model> modelsDic;
-        private static readonly Dictionary<Type, View> viewsDic;
-        private static readonly Dictionary<Type, Service> servicesDic;
+        private static readonly Dictionary<Type, Module> modulesDic; //Module Type作为key
+        private static readonly Dictionary<Type, Controller> controllersDic;//Controller Type作为key
+        private static readonly Dictionary<Type, Model> modelsDic;//Model Type作为key
+        private static readonly Dictionary<Type, View> viewsDic;//View Type作为key
+        private static readonly Dictionary<Type, Service> servicesDic;//Service Type作为key
+
+        private static readonly Dictionary<Type, Delegate> sendCommandDelegateDic;// Command Type作为key
+        private static readonly Dictionary<Type, Delegate> postCommandDelegateDic;// Service Type作为key
 
         private static readonly GameObject core;
         private static readonly GameObject viewRoot;
@@ -64,27 +57,79 @@ namespace ZCore {
             modelsDic = new Dictionary<Type, Model>();
             viewsDic = new Dictionary<Type, View>();
             servicesDic = new Dictionary<Type, Service>();
+            sendCommandDelegateDic = new Dictionary<Type, Delegate>();
+            postCommandDelegateDic = new Dictionary<Type, Delegate>();
             GameObject core = new GameObject("Core");
             UnityEngine.Object.DontDestroyOnLoad(core);
             controllers = new GameObject("Controllers");
             controllers.transform.SetParent(core.transform);
             viewRoot = new GameObject("ViewRoot");
-            viewRoot.transform.SetParent(core.transform);
         }
 
+
+        //指定强类型 直接进行委托调用 调用速度更快(推荐)
+        public static void SendCommand<TModule, TCommand>(TCommand cmd) where TModule : Module, new() where TCommand : Command {
+            Type commandType = typeof(TCommand);
+            Delegate action = null;
+            if (!sendCommandDelegateDic.TryGetValue(commandType, out action)) {
+                Type moduleType = typeof(TModule);
+                TModule module = GetModule<TModule>();
+                MethodInfo methodInfo = moduleType.GetMethod(string.Format("On{0}", cmd.GetType().Name), BindingFlags.Public | BindingFlags.Instance);
+                if (methodInfo == null) {
+                    throw new CoreException(string.Format("[Core.SendCommand]Unhandled Command : {0} for {1}", cmd.GetType().Name, module.GetType().Name));
+                }
+                action = methodInfo.CreateDelegate(typeof(Action<TCommand>), module);
+                sendCommandDelegateDic.Add(commandType, action);
+            }
+            (action as Action<TCommand>)(cmd);
+        }
+
+        //未指定强类型 使用MethodInfo.Invoke调用方法或使用后期绑定的方式调用委托
+        //开销是明确委托类型的情况下调用的100倍左右
         public static void SendCommand<TModule>(Command cmd) where TModule : Module, new() {
-            PostCommand<TModule>(cmd);
+            Type commandType = cmd.GetType();
+            Delegate action = null;
+            if (!sendCommandDelegateDic.TryGetValue(commandType, out action)) {
+                Type moduleType = typeof(TModule);
+                TModule module = GetModule<TModule>();
+                MethodInfo methodInfo = moduleType.GetMethod(string.Format("On{0}", cmd.GetType().Name), BindingFlags.Public | BindingFlags.Instance);
+                if (methodInfo == null) {
+                    throw new CoreException(string.Format("[Core.SendCommand]Unhandled Command : {0} for {1}", cmd.GetType().Name, module.GetType().Name));
+                }
+                methodInfo.Invoke(module, new object[] { cmd });
+            }
+            else action.DynamicInvoke(cmd);
+        }
+
+        public static TResult PostCommand<TModule, TCommand, TResult>(TCommand cmd) where TModule : Module, new() where TCommand : Command {
+            Type commandType = typeof(TCommand);
+            Delegate func = null;
+            if(!postCommandDelegateDic.TryGetValue(commandType, out func)) {
+                Type moduleType = typeof(TModule);
+                TModule module = GetModule<TModule>();
+                MethodInfo methodInfo = moduleType.GetMethod(string.Format("On{0}", cmd.GetType().Name), BindingFlags.Public | BindingFlags.Instance);
+                if (methodInfo == null) {
+                    throw new CoreException(string.Format("[Core.PostCommand]Unhandled Command : {0} for {1}", cmd.GetType().Name, module.GetType().Name));
+                }
+                func = methodInfo.CreateDelegate(typeof(Func<TCommand, TResult>), module);
+                postCommandDelegateDic.Add(commandType, func);
+            }
+            return (func as Func<TCommand, TResult>)(cmd);
         }
 
         public static object PostCommand<TModule>(Command cmd) where TModule : Module, new() {
-            //调用对应Module下的实例的OnxxxxCommand函数
-            Type moduleType = typeof(TModule);
-            TModule module = GetModule<TModule>();
-            MethodInfo methodInfo = moduleType.GetMethod(string.Format("On{0}", cmd.GetType().Name), BindingFlags.Public | BindingFlags.Instance);
-            if (methodInfo == null) {
-                throw new CoreException(string.Format("[Core.PostCommand]Unhandled Command : {0} for {1}", cmd.GetType().Name, module.GetType().Name));
+            Type commandType = cmd.GetType();
+            Delegate function = null;
+            if (!postCommandDelegateDic.TryGetValue(commandType, out function)) {
+                Type moduleType = typeof(TModule);
+                TModule module = GetModule<TModule>();
+                MethodInfo methodInfo = moduleType.GetMethod(string.Format("On{0}", cmd.GetType().Name), BindingFlags.Public | BindingFlags.Instance);
+                if (methodInfo == null) {
+                    throw new CoreException(string.Format("[Core.PostCommand]Unhandled Command : {0} for {1}", cmd.GetType().Name, module.GetType().Name));
+                }
+                return methodInfo.Invoke(module, new object[] { cmd });
             }
-            return methodInfo.Invoke(module, new object[] { cmd });
+            else return function.DynamicInvoke(cmd);
         }
 
         /// <summary>获取某个模块的名称</summary>

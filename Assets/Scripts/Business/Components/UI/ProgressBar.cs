@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour {
@@ -14,6 +15,8 @@ public class ProgressBar : MonoBehaviour {
 
     [SerializeField]
     private Text text;
+
+    public UnityEvent unityEvent;
 
     private void Start() {
         Init();

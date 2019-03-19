@@ -28,7 +28,7 @@ namespace ZCore {
     /// <summary>网络请求相关</summary>
     /// 如果Http响应代码大于等于400 则isHttpError返回true
     /// 如果无法解析DNS地址,套接字错误或超出重定向
-    public class Service {
+    public abstract class Service {
 
         protected IEnumerator Get(string url) {
             yield return Get(url, null);

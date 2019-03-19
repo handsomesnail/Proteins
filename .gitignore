@@ -12,7 +12,6 @@
 /UWP/
 
 # Untracked Assets
-/Assets/StreamingAssets/
 /Assets/Image/
 /Assets/Font/
 *.jpg

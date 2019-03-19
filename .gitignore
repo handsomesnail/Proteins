@@ -11,15 +11,6 @@
 /Packages/
 /UWP/
 
-# Untracked Assets
-/Assets/Image/
-/Assets/Font/
-*.jpg
-*.png
-*.ttf
-*.ttc
-*.wsa
-
 # UWPExtension Project
 /
 

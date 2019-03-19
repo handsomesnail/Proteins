@@ -49,6 +49,10 @@ public class App : MonoBehaviour {
     private async void LoadData() {
         await PolymerModelAPI.LoadDataAsync();
         Debug.Log("加载数据完成");
+        CoreAPI.SendCommand<PdbLoaderModule, LoadDefaultPdbFileCommand>(new LoadDefaultPdbFileCommand("5zql", () => {
+            CoreAPI.SendCommand<ProteinDisplayModule, ShowProteinCommand>(new ShowProteinCommand());
+        }));
+
     }
 
     [ImplementedInController]

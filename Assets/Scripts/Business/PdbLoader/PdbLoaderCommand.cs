@@ -28,3 +28,16 @@ public class LoadNetworkPdbFileCommand : PdbLoaderCommand {
 
 public class GetProteinDataCommand : PdbLoaderCommand { }
 
+public class LoadDefaultPdbFileCommand : PdbLoaderCommand {
+
+    public string IDCode { get; private set; }
+
+    public Action CompleteCallback { get; private set; }
+
+    public LoadDefaultPdbFileCommand(string idCode, Action completeCallback) {
+        this.IDCode = idCode;
+        this.CompleteCallback = completeCallback;
+    }
+}
+
+

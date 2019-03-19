@@ -39,9 +39,25 @@ public class PdbLoaderController : Controller {
         ));
     }
 
-    /// <summary>解析Pdb文件数据</summary>
+    /// <summary>从本地加载默认的PDB文件 </summary>
+    public void LoadDefaultPdbFileCommand(string IDCode, Action completeCallback) {
+        PdbLoaderService service = GetService<PdbLoaderService>();
+        StartCoroutine(service.LoadDefaultPdbFile(
+            IDCode,
+            (str) => {
+                ParsePdbData(str);
+                completeCallback?.Invoke();
+            }));
+    }
+
     private void ParsePdbData(byte[] data) {
-        using (StringReader sr = new StringReader(Encoding.UTF8.GetString(data))) {
+        string str = Encoding.UTF8.GetString(data);
+        ParsePdbData(str);
+    }
+
+    /// <summary>解析Pdb文件数据</summary>
+    private void ParsePdbData(string str) {
+        using (StringReader sr = new StringReader(str)) {
             string record = null;//当前读取的记录
 
             //蛋白质作用域***********/
@@ -50,7 +66,7 @@ public class PdbLoaderController : Controller {
             string publishDate = null;
             Dictionary<string, Chain> chains = new Dictionary<string, Chain>();
             Vector3 minPos = Vector3.zero;
-            Vector3 maxPos = Vector3.zero; 
+            Vector3 maxPos = Vector3.zero;
             Vector3 centerPos = Vector3.zero;
             //*************************/
 
@@ -111,7 +127,7 @@ public class PdbLoaderController : Controller {
                     float z = float.Parse(record.Substring(46, 8).Trim()); //47-54
                     Vector3 pos = new Vector3(x, y, z);
                     if (minPos == Vector3.zero) { minPos = pos; }
-                    if(maxPos == Vector3.zero) { maxPos = pos; }
+                    if (maxPos == Vector3.zero) { maxPos = pos; }
                     if (x > maxPos.x) maxPos.x = x; if (y > maxPos.y) maxPos.y = y; if (z > maxPos.z) maxPos.z = z;
                     if (x < minPos.x) minPos.x = x; if (y < minPos.y) minPos.y = y; if (z < minPos.z) minPos.z = z;
                     if (atomName == "OXT") {

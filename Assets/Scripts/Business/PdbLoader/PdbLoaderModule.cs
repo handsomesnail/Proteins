@@ -21,4 +21,11 @@ public class PdbLoaderModule : Module {
         return GetController<PdbLoaderController>().GetProteinData();
     }
 
+    public void OnLoadDefaultPdbFileCommand(LoadDefaultPdbFileCommand cmd) {
+        GetController<PdbLoaderController>().LoadDefaultPdbFileCommand(cmd.IDCode, cmd.CompleteCallback);
+    }
+
+
+
+
 }

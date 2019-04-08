@@ -17,19 +17,12 @@ namespace ZCore {
         void InvokeOnController(T parameter);
     }
 
-
     public abstract class ViewBaseEventHandler : MonoBehaviour {
-
-        //[Serializable]
-        //public class TEvent : UnityEvent<T> { }
-
-        //[SerializeField]
-        //private TEvent Event; //必须在运行前绑定
 
         protected Delegate[] delegateList;
 
         /// <summary>将序列化的UnityEvent转化为委托链</summary>
-        internal static Delegate[] ConvertDelegateList(UnityEventBase unityEvent) {
+        internal static Delegate[] ConvertDelegateList(UnityEvent unityEvent) {
             int eventCount = unityEvent.GetPersistentEventCount();
             Delegate[] delegateList = new Delegate[eventCount];
             for (int i = 0; i < eventCount; i++) {
@@ -39,17 +32,18 @@ namespace ZCore {
                 if (view == null) {
                     throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]Target object : {0} is not a Core.View component", target.name));
                 }
+                MethodInfo viewMethodInfo = view.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
+                if (viewMethodInfo == null) {
+                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]NotImplemented viewEvent method : {0} in {1}", methodName, view.GetType().Name));
+                }
+                ImplementedInControllerAttribute attributeInfo = viewMethodInfo.GetCustomAttribute(typeof(ImplementedInControllerAttribute)) as ImplementedInControllerAttribute;
+                if (attributeInfo == null) {
+                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]The viewEvent method : {0} in {1} doesn't has ImplementedInControllerAttribute", viewMethodInfo.Name, view.GetType().Name));
+                }
                 Controller controller = view.GetController();
-                MethodInfo methodInfo = controller.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo methodInfo = controller.GetType().GetMethod(attributeInfo.IsCustomMethodName ? attributeInfo.MethodName : methodName, BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
                 if (methodInfo == null) {
-                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]NotImplemented viewEvent method : {0} in {1}", methodInfo.Name, controller.GetType().Name));
-                }
-                ParameterInfo[] parameterInfos = methodInfo.GetParameters();
-                if (parameterInfos.Length != 0) { //无参
-                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]The illegal method : {0}.{1} It's not supported to pass parameter", controller.GetType().Name, methodInfo.Name));
-                }
-                if (methodInfo.ReturnType != typeof(void)) { //无返回值
-                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]The illegal method : {0}.{1} It's not supported to return value", controller.GetType().Name, methodInfo.Name));
+                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]NotImplemented viewEvent method : {0} in {1}", attributeInfo.MethodName, controller.GetType().Name));
                 }
                 Delegate action = methodInfo.CreateDelegate(typeof(Action), controller);
                 delegateList[i] = action;
@@ -64,20 +58,22 @@ namespace ZCore {
                 UnityEngine.Object target = unityEvent.GetPersistentTarget(i);
                 string methodName = unityEvent.GetPersistentMethodName(i);
                 View view = target as View;
+
                 if (view == null) {
                     throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]Target object : {0} is not a Core.View component", target.name));
                 }
+                MethodInfo viewMethodInfo = view.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance, null, new Type[] { typeof(TParameter)}, null);
+                if (viewMethodInfo == null) {
+                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]NotImplemented viewEvent method : {0} in {1}", viewMethodInfo.Name, view.GetType().Name));
+                }
+                ImplementedInControllerAttribute attributeInfo = viewMethodInfo.GetCustomAttribute(typeof(ImplementedInControllerAttribute)) as ImplementedInControllerAttribute;
+                if (attributeInfo == null) {
+                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]The viewEvent method : {0} in {1} doesn't has ImplementedInControllerAttribute", viewMethodInfo.Name, view.GetType().Name));
+                }
                 Controller controller = view.GetController();
-                MethodInfo methodInfo = controller.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo methodInfo = controller.GetType().GetMethod(attributeInfo.IsCustomMethodName ? attributeInfo.MethodName : methodName, BindingFlags.Public | BindingFlags.Instance, null, new Type[] { typeof(TParameter) }, null);
                 if (methodInfo == null) {
                     throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]NotImplemented viewEvent method : {0} in {1}", methodInfo.Name, controller.GetType().Name));
-                }
-                ParameterInfo[] parameterInfos = methodInfo.GetParameters();
-                if (parameterInfos.Length != 1 || parameterInfos[0].ParameterType != typeof(TParameter)) { //只有一个对应类型参
-                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]The illegal method : {0}.{1} its parameter is not match the Type : {2}", controller.GetType().Name, methodInfo.Name, typeof(TParameter).Name));
-                }
-                if (methodInfo.ReturnType != typeof(void)) { //无返回值
-                    throw new CoreException(string.Format("[ViewBaseEventHandler.ConvertDelegateList]The illegal method : {0}.{1} It's not supported to return value", controller.GetType().Name, methodInfo.Name));
                 }
                 Delegate action = methodInfo.CreateDelegate(typeof(Action<TParameter>), controller);
                 delegateList[i] = action;

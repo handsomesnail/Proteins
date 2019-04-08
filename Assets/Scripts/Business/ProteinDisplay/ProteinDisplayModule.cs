@@ -17,4 +17,8 @@ public class ProteinDisplayModule : Module {
         GetController<ProteinDisplayController>().ShowInfoInBoard(cmd.AtomDisplayer);
     }
 
+    public void OnSetDisplayModeCommand(SetDisplayModeCommand cmd) {
+        GetController<ProteinDisplayController>().SetDisplayMode(cmd.DisplayMode);
+    }
+
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,16 @@ namespace ZCore {
         public static object PostCommand<TModule>(Command cmd) where TModule : Module, new() {
             return Core.PostCommand<TModule>(cmd);
         }
-        //TODO: 异步的带回调函数的发送指令
-    }
 
+        //TODO: 异步的带回调函数的发送指令
+
+        public static void PostCommandAsync<TModule, TCommand, TResult>(TCommand cmd, Action<TResult> callBack) where TModule : Module, new() where TCommand : Command {
+            Core.PostCommandAsync<TModule, TCommand, TResult>(cmd, callBack);
+        }
+
+        public static void PostCommandAsync<TModule>(Command cmd, Action<object> callBack) where TModule : Module, new() {
+            Core.PostCommandAsync<TModule>(cmd, callBack);
+        }
+
+    }
 }

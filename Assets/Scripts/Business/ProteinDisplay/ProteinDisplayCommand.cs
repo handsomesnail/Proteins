@@ -18,3 +18,11 @@ public class ShowInfoInBoardCommand : ProteinDisplayCommand {
     }
 
 }
+
+public class SetDisplayModeCommand : ProteinDisplayCommand {
+    public DisplayMode DisplayMode { get; private set; }
+
+    public SetDisplayModeCommand(DisplayMode displayMode) {
+        this.DisplayMode = DisplayMode;
+    }
+}

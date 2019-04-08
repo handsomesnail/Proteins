@@ -113,124 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &220202071
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000011337565444, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 220202072}
-  - component: {fileID: 220202073}
-  m_Layer: 0
-  m_Name: MouseXYRotationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &220202072
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000010590998566, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 220202071}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &220202073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000013933693316, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 220202071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 4.5
-  UseUnscaledTime: 1
-  axisType: 11
-  buttonType: 1
-  InputManagerHorizontalAxisName: 
-  InputManagerVerticalAxisName: 
-  Axis0Destination: 0
-  Axis1Destination: 2
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
---- !u!1 &338739709
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000010136702736, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 338739711}
-  - component: {fileID: 338739710}
-  m_Layer: 0
-  m_Name: JoystickXZTranslationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &338739710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011221680894, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 338739709}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 3
-  UseUnscaledTime: 1
-  axisType: 0
-  buttonType: 21
-  InputManagerHorizontalAxisName: CONTROLLER_RIGHT_STICK_HORIZONTAL
-  InputManagerVerticalAxisName: CONTROLLER_RIGHT_STICK_VERTICAL
-  Axis0Destination: 0
-  Axis1Destination: 4
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
---- !u!4 &338739711
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000010085977160, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 338739709}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &382672423
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,65 +412,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 752489218}
---- !u!1 &845009746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000012373135252, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 845009747}
-  - component: {fileID: 845009748}
-  m_Layer: 0
-  m_Name: KeyboardXYRotationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &845009747
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000011800569768, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 845009746}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &845009748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000012889557236, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 845009746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 1
-  UseUnscaledTime: 1
-  axisType: 6
-  buttonType: 21
-  InputManagerHorizontalAxisName: 
-  InputManagerVerticalAxisName: 
-  Axis0Destination: 2
-  Axis1Destination: 1
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
 --- !u!1 &946720359
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,69 +453,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1035241220
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011021619270, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000013304850028, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-        type: 2}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000013304850028, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-        type: 2}
-      propertyPath: near clip plane
-      value: 0.35
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114000013543835744, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-  m_IsPrefabParent: 0
 --- !u!20 &1035241221
 Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 20000013304850028, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
     type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1758094439}
   m_Enabled: 1
   serializedVersion: 2
@@ -751,31 +517,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d1a2a33ffcac354298137001635a001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsGazingAtObject>k__BackingField: 0
-  <HitObject>k__BackingField: {fileID: 0}
-  <HitPosition>k__BackingField: {x: 0, y: 0, z: 0}
-  <HitNormal>k__BackingField: {x: 0, y: 0, z: 0}
   MaxGazeCollisionDistance: 10
   RaycastLayerMasks:
-  - m_Bits: 4294967291
+  - serializedVersion: 2
+    m_Bits: 4294967291
   Stabilizer: {fileID: 0}
   GazeTransform: {fileID: 0}
   DebugDrawRay: 0
-  <Result>k__BackingField:
-    <StartPoint>k__BackingField: {x: 0, y: 0, z: 0}
-    <End>k__BackingField:
-      Point: {x: 0, y: 0, z: 0}
-      Normal: {x: 0, y: 0, z: 0}
-      Object: {fileID: 0}
-    <PreviousEndObject>k__BackingField: {fileID: 0}
-    <RayStepIndex>k__BackingField: 0
-  rays:
-  - <Origin>k__BackingField: {x: 0, y: 0, z: 0}
-    <Terminus>k__BackingField: {x: 0, y: 0, z: 0}
-    <Direction>k__BackingField: {x: 0, y: 0, z: 0}
-    <Length>k__BackingField: 0
-  <FocusLocked>k__BackingField: 0
-  lastHitDistance: 2
 --- !u!4 &1158718632
 Transform:
   m_ObjectHideFlags: 0
@@ -794,65 +542,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224696786654489532, guid: 082f43c49b3ff5d44b39a338ac2ee313,
     type: 2}
   m_PrefabInternal: {fileID: 1298434401}
---- !u!1 &1221678956
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000012744789930, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1221678957}
-  - component: {fileID: 1221678958}
-  m_Layer: 0
-  m_Name: MouseXYTranslationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1221678957
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000010393938340, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1221678956}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1221678958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011359953050, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1221678956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 1
-  UseUnscaledTime: 1
-  axisType: 13
-  buttonType: 21
-  InputManagerHorizontalAxisName: 
-  InputManagerVerticalAxisName: 
-  Axis0Destination: 0
-  Axis1Destination: 2
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
 --- !u!1001 &1298434401
 Prefab:
   m_ObjectHideFlags: 0
@@ -957,223 +646,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 082f43c49b3ff5d44b39a338ac2ee313, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1301085092
-GameObject:
+--- !u!1001 &1394589781
+Prefab:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000011026140476, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1301085093}
-  - component: {fileID: 1301085094}
-  m_Layer: 0
-  m_Name: JoystickXYTranslationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1301085093
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000014150713462, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1301085092}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1301085094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000010160007858, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1301085092}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 3
-  UseUnscaledTime: 1
-  axisType: 0
-  buttonType: 21
-  InputManagerHorizontalAxisName: CONTROLLER_LEFT_TRIGGER
-  InputManagerVerticalAxisName: CONTROLLER_RIGHT_TRIGGER
-  Axis0Destination: 2
-  Axis1Destination: 3
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
---- !u!1 &1371247074
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000011489060388, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1371247075}
-  m_Layer: 0
-  m_Name: GazeControls
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1371247075
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000010510211078, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1371247074}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 220202072}
-  - {fileID: 1221678957}
-  - {fileID: 2072100921}
-  - {fileID: 845009747}
-  - {fileID: 1434584800}
-  - {fileID: 2147058528}
-  - {fileID: 1842649138}
-  - {fileID: 1451636699}
-  - {fileID: 1301085093}
-  - {fileID: 338739711}
-  m_Father: {fileID: 1758094444}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1434584799
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000013425959562, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1434584800}
-  - component: {fileID: 1434584801}
-  m_Layer: 0
-  m_Name: KeyboardXZRotationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1434584800
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000012536474926, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1434584799}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1434584801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000014171224568, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1434584799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 1
-  UseUnscaledTime: 1
-  axisType: 7
-  buttonType: 21
-  InputManagerHorizontalAxisName: 
-  InputManagerVerticalAxisName: 
-  Axis0Destination: 5
-  Axis1Destination: 4
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
---- !u!1 &1451636698
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000014073514604, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1451636699}
-  - component: {fileID: 1451636700}
-  m_Layer: 0
-  m_Name: JoystickXYRotationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1451636699
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000012610367806, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1451636698}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1451636700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000013649663976, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1451636698}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 3
-  UseUnscaledTime: 1
-  axisType: 0
-  buttonType: 21
-  InputManagerHorizontalAxisName: CONTROLLER_LEFT_STICK_HORIZONTAL
-  InputManagerVerticalAxisName: CONTROLLER_LEFT_STICK_VERTICAL
-  Axis0Destination: 2
-  Axis1Destination: 0
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4466805640949136, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466805640949136, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466805640949136, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466805640949136, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466805640949136, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466805640949136, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466805640949136, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466805640949136, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 08d25ccfbbc595b4a820c7edd551d095, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1526980365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,7 +758,7 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 1000011021619270, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
     type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1758094444}
@@ -1252,6 +766,7 @@ GameObject:
   - component: {fileID: 1758094443}
   - component: {fileID: 1758094442}
   - component: {fileID: 1758094441}
+  - component: {fileID: 1758094440}
   m_Layer: 0
   m_Name: HoloLensCamera
   m_TagString: MainCamera
@@ -1259,12 +774,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1758094440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1758094439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92bfe1734f0acc49ba27f2872419917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _GameObject: {fileID: 0}
 --- !u!81 &1758094441
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 81000013783107718, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
     type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1758094439}
   m_Enabled: 1
 --- !u!124 &1758094442
@@ -1272,7 +799,7 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 124000011504821460, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
     type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1758094439}
   m_Enabled: 1
 --- !u!92 &1758094443
@@ -1280,7 +807,7 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 92000010221946138, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
     type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1758094439}
   m_Enabled: 1
 --- !u!4 &1758094444
@@ -1288,75 +815,15 @@ Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 4000010560871102, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
     type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1758094439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1371247075}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1842649137
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000010956895450, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1842649138}
-  - component: {fileID: 1842649139}
-  m_Layer: 0
-  m_Name: KeyboardXZTranslationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1842649138
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000011708201582, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1842649137}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1842649139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000012656745502, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 1842649137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 3
-  UseUnscaledTime: 1
-  axisType: 0
-  buttonType: 21
-  InputManagerHorizontalAxisName: Horizontal
-  InputManagerVerticalAxisName: Vertical
-  Axis0Destination: 0
-  Axis1Destination: 4
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
 --- !u!1 &1981707056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,121 +898,3 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1981707056}
---- !u!1 &2072100920
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000011947540078, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2072100921}
-  - component: {fileID: 2072100922}
-  m_Layer: 0
-  m_Name: MouseXZTranslationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2072100921
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000012378391282, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 2072100920}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2072100922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000013988799740, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 2072100920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 3
-  UseUnscaledTime: 1
-  axisType: 12
-  buttonType: 3
-  InputManagerHorizontalAxisName: 
-  InputManagerVerticalAxisName: 
-  Axis0Destination: 4
-  Axis1Destination: 6
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0
---- !u!1 &2147058527
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000012618464992, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2147058528}
-  - component: {fileID: 2147058529}
-  m_Layer: 0
-  m_Name: KeyboardXYTranslationAxis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2147058528
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000011251444590, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 2147058527}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1371247075}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2147058529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000012298662144, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1035241220}
-  m_GameObject: {fileID: 2147058527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b627838df61e64baecc87fee2dec17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SensitivityScale: 1
-  UseUnscaledTime: 1
-  axisType: 3
-  buttonType: 21
-  InputManagerHorizontalAxisName: 
-  InputManagerVerticalAxisName: 
-  Axis0Destination: 2
-  Axis1Destination: 6
-  Axis2Destination: 6
-  lastMousePosition: {x: 0, y: 0, z: 0}
-  isMouseJumping: 0
-  appHasFocus: 1
-  usingMouse: 0
-  inputManagerAxesNeedApproval: 1
-  inputManagerHorizontalAxisApproved: 0
-  inputManagerVerticalAxisApproved: 0

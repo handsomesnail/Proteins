@@ -19,7 +19,9 @@ namespace ZCore {
         }
 
         public void InvokeOnController() {
-            InvokeOnController();
+            foreach (Delegate action in delegateList) {
+                (action as Action)();
+            }
         }
 
     }

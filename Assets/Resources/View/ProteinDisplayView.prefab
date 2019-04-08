@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f3014bb317cbc4a99976340d2b8a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayMode: 1
+  displayMode: 0
   Canvas2D: {fileID: 1295748140489730}
   Displayer3DRoot: {fileID: 1222480773166782}
   SingleBondPrefeb: {fileID: 1980585278095308, guid: ad238a6abb44349439d2e68e31d8a65e,

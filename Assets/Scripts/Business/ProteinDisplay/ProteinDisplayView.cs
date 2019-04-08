@@ -9,7 +9,7 @@ public class ProteinDisplayView : View {
 
     private const string AtomSpherePrefebPath = "Model/AtomSphere";
 
-    public DisplayMode displayMode;
+    //public DisplayMode displayMode;
 
     //内置球模型的原本直径为1单位
     private const float AtomFillSize = 0.25f; // 球模型中原子的实际直径大小(0.25m)
@@ -36,13 +36,7 @@ public class ProteinDisplayView : View {
 
     [Header("UIReference")]
     [SerializeField]
-    private Text proteinInfoText;
-    [SerializeField]
-    private Text chaininInfoText;
-    [SerializeField]
-    private Text aminoacidInfoText;
-    [SerializeField]
-    private Text atomInfoText;
+    private PolymerInfoDisplayer polymerInfoDisplayer;
 
     protected override void OnCreated() {
         base.OnCreated();
@@ -50,6 +44,7 @@ public class ProteinDisplayView : View {
         AtomPrefebsDic = new Dictionary<AminoacidType, GameObject>();
     }
 
+    /// <summary>根据残基类型获取原子预制体</summary>
     private GameObject GetAtomPrefeb(AminoacidType aminoacidType) {
         GameObject prefeb = null;
         if (!AtomPrefebsDic.TryGetValue(aminoacidType, out prefeb)) {
@@ -59,11 +54,13 @@ public class ProteinDisplayView : View {
         return AtomPrefebsDic[aminoacidType];
     }
 
+    /// <summary>根据残基类型获取材质</summary>
     private Material GetMaterial(AminoacidType aminoacidType) {
         return GetAtomPrefeb(aminoacidType).GetComponent<Renderer>().sharedMaterial;
     }
 
-    public void ShowProtein(Protein protein) {
+    /// <summary>根据DisplayMode创建整个蛋白质模型 </summary>
+    public void CreateProtein(Protein protein, DisplayMode displayMode) {
         GameObject proteinDisplayerGo = new GameObject(protein.ID, typeof(ProteinDisplayer));
         proteinDisplayerGo.GetComponent<ProteinDisplayer>().Protein = protein;
         proteinDisplayerGo.transform.SetParent(Displayer3DRoot.transform);
@@ -135,33 +132,28 @@ public class ProteinDisplayView : View {
     }
 
     public void SetBoardInfo(AtomDisplayer atomDisplayer) {
-        if(atomDisplayer == null) {
-            proteinInfoText.text = "";
-            chaininInfoText.text = "";
-            aminoacidInfoText.text = "";
-            atomInfoText.text = "";
-            return;
-        }
-        AtomInAminoacid atomInAminoacid = atomDisplayer.AtomInAminoacid;
-        AminoacidInProtein aminoacidInProtein = atomDisplayer.AminoacidInProtein;
-        Chain chain = aminoacidInProtein.Chain;
-        Protein protein = chain.Protein;
-        proteinInfoText.text = string.Format("-Protein-\nID: {0}\nClassification: {1}\nPublishDate: {2}",
-            protein.ID,protein.Classification,protein.PublishDate);
-        chaininInfoText.text = string.Format("-Chain-\nID: {0}\nOXT: {1}",
-            chain.ID, chain.OXT != null);
-        aminoacidInfoText.text = string.Format("-Aminoacid-\nSeq: {0}\nType: {1}\nIsStandard: {2}",
-            aminoacidInProtein.ResidueSeq, aminoacidInProtein.Aminoacid.Type.ToString(), aminoacidInProtein.Aminoacid.IsStandard);
-        atomInfoText.text = string.Format("-Atom-\nName: {0}\nSerial: {1}\nPosition: {2}",
-            atomInAminoacid.Name, aminoacidInProtein.AtomInAminoacidSerial[atomInAminoacid], aminoacidInProtein.AtomInAminoacidPos[atomInAminoacid].ToString("F3"));
+        polymerInfoDisplayer.SetData(atomDisplayer);
     }
 
+    public void SetBoardInfo(AminoacidDisplayer aminoacidDisplayer) {
+        polymerInfoDisplayer.SetData(aminoacidDisplayer);
+    }
 
+    public void SetBoardInfo(ChainDisplayer chainDisplayer) {
+        polymerInfoDisplayer.SetData(chainDisplayer);
+    }
+
+    public void ClearBoardInfo() {
+        polymerInfoDisplayer.ClearData();
+    }
+
+    /// <summary>销毁创建的蛋白质模型</summary>
     public void DestroyProtein() {
         Destroy(Displayer3DRoot.transform.GetChild(0).gameObject);
     }
 
     //这里的position是真正坐标而不是pdb文件中读取的坐标
+    /// <summary>创建键</summary>
     private GameObject GenerateBondGameObject(string name, Vector3 pos1, Vector3 pos2, BondType bondType, Transform parent, AminoacidType aminoacidType) {
         GameObject bondGo = null;
         Material material = GetMaterial(aminoacidType);
@@ -185,12 +177,5 @@ public class ProteinDisplayView : View {
         bondGo.transform.LookAt(pos1);
         return bondGo;
     }
-
-    [ImplementedInController("OnSliderChanged")]
-    public void OnSliderChanged(float value) { }
-
-    [ImplementedInController("OnBallStickToggleChanged")]
-    public void OnBallStickToggleChanged(bool value) { }
-
 
 }

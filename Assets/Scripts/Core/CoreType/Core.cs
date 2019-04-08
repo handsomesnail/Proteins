@@ -37,7 +37,8 @@ namespace ZCore {
         private static readonly Dictionary<Type, Service> servicesDic;//Service Type作为key
 
         private static readonly Dictionary<Type, Delegate> sendCommandDelegateDic;// Command Type作为key
-        private static readonly Dictionary<Type, Delegate> postCommandDelegateDic;// Service Type作为key
+        private static readonly Dictionary<Type, Delegate> postCommandDelegateDic;// Command Type作为key
+        private static readonly Dictionary<Type, Delegate> postAsyncCommandDelegateDic;// Command Type作为key
 
         private static readonly GameObject core;
         private static readonly GameObject viewRoot;
@@ -59,6 +60,7 @@ namespace ZCore {
             servicesDic = new Dictionary<Type, Service>();
             sendCommandDelegateDic = new Dictionary<Type, Delegate>();
             postCommandDelegateDic = new Dictionary<Type, Delegate>();
+            postAsyncCommandDelegateDic = new Dictionary<Type, Delegate>();
             GameObject core = new GameObject("Core");
             UnityEngine.Object.DontDestroyOnLoad(core);
             controllers = new GameObject("Controllers");
@@ -130,6 +132,14 @@ namespace ZCore {
                 return methodInfo.Invoke(module, new object[] { cmd });
             }
             else return function.DynamicInvoke(cmd);
+        }
+
+        public static void PostCommandAsync<TModule, TCommand, TResult>(TCommand cmd, Action<TResult> callBack) where TModule : Module, new() where TCommand : Command {
+            //(action as Action<TCommand, Action<TResult>>)(cmd, callBack);
+        }
+
+        public static void PostCommandAsync<TModule>(Command cmd, Action<object> callBack) where TModule : Module, new() {
+            //action.DynamicInvoke(cmd,callBack);
         }
 
         /// <summary>获取某个模块的名称</summary>

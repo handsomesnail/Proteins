@@ -48,5 +48,11 @@ public static class Utility {
         return random.Next();
     }
 
+    public static void Active(this GameObject gameObject, bool active) {
+        if(gameObject.activeSelf != active) {
+            gameObject.SetActive(active);
+        }
+    }
+
 
 }

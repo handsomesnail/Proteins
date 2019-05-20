@@ -9,20 +9,22 @@ public class ShowProteinCommand : ProteinDisplayCommand { }
 
 public class ShowDisplayViewCommand : ProteinDisplayCommand { }
 
-public class ShowInfoInBoardCommand : ProteinDisplayCommand {
+public class SetSelectedDisplayerCommand : ProteinDisplayCommand {
 
-    public AtomDisplayer AtomDisplayer { get; private set; }
+    public IDisplayerSelected Displayer { get; private set; }
 
-    public ShowInfoInBoardCommand(AtomDisplayer atomDisplayer) {
-        this.AtomDisplayer = atomDisplayer;
+    public SetSelectedDisplayerCommand(IDisplayerSelected displayer) {
+        this.Displayer = displayer;
     }
 
 }
 
-public class SetDisplayModeCommand : ProteinDisplayCommand {
-    public DisplayMode DisplayMode { get; private set; }
+public class GetSelectedDisplayerCommand: ProteinDisplayCommand { }
 
-    public SetDisplayModeCommand(DisplayMode displayMode) {
-        this.DisplayMode = DisplayMode;
+public class SetPolymerInfoDisplayerActiveCommand : ProteinDisplayCommand {
+    public bool Active { get; private set; }
+
+    public SetPolymerInfoDisplayerActiveCommand(bool active) {
+        this.Active = active;
     }
 }

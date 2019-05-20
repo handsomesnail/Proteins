@@ -6,7 +6,7 @@ using PolymerModel.Data;
 
 public class PdbLoaderModule : Module {
 
-    /// <summary>读取本地pdb文件 </summary>
+    /// <summary>选取本地pdb文件 </summary>
     public void OnLoadLocalPdbFileCommand(LoadLocalPdbFileCommand cmd) {
         GetController<PdbLoaderController>().LoadLocalPdbFileAsync(cmd.CompleteCallback);
     }
@@ -21,8 +21,9 @@ public class PdbLoaderModule : Module {
         return GetController<PdbLoaderController>().GetProteinData();
     }
 
+    /// <summary>读取本地示例文件 </summary>
     public void OnLoadDefaultPdbFileCommand(LoadDefaultPdbFileCommand cmd) {
-        GetController<PdbLoaderController>().LoadDefaultPdbFileCommand(cmd.IDCode, cmd.CompleteCallback);
+        GetController<PdbLoaderController>().LoadDefaultPdbFile(cmd.IDCode, cmd.CompleteCallback);
     }
 
 

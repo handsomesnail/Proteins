@@ -1565,7 +1565,7 @@ MonoBehaviour:
   Targets: []
   lockFocus: 0
   buttonParent: {fileID: 0}
-  maxCharsPerLine: 45
+  maxCharsPerLine: 48
   titleText: {fileID: 0}
   messageText: {fileID: 0}
   twoButtonSet: []

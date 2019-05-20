@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using ZCore;
 
 public class PolymerInfoItem : MonoBehaviour, IPointerSpecificFocusable {
     
@@ -10,8 +11,24 @@ public class PolymerInfoItem : MonoBehaviour, IPointerSpecificFocusable {
     private GameObject frontPlate;
     [SerializeField]
     private GameObject infoPanel;
+    [SerializeField]
+    private DisplayerType displayerType;
 
-    public bool CanShow = true;
+    public bool CanShow {
+        get {
+            IDisplayerSelected displayer = CoreAPI.PostCommand<ProteinDisplayModule, GetSelectedDisplayerCommand, IDisplayerSelected>(new GetSelectedDisplayerCommand());
+            if (displayer == null)
+                return false;
+            PolymerSelectMode selectMode = CoreAPI.PostCommand<MainConsoleModule, GetSelectModeCommand, PolymerSelectMode>(new GetSelectModeCommand());
+            switch (displayerType) {
+                case DisplayerType.Protein: return true;
+                case DisplayerType.Chain: return selectMode >= PolymerSelectMode.Chain; //恒为true
+                case DisplayerType.Residue: return selectMode >= PolymerSelectMode.Residue;
+                case DisplayerType.Atom: return selectMode >= PolymerSelectMode.Atom;
+                default: return false;
+            }
+        }
+    }
 
     public UnityEvent OnEnter;
     public UnityEvent OnExit;

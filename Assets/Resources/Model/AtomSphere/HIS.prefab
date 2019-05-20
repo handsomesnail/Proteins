@@ -52,12 +52,12 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9a916202a72c4e74fa5404488b4e8045, type: 2}
+  - {fileID: 2100000, guid: 540b86e7f4718424a85d4eb17005d2b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf2aa301e7a7f447b28174fe5a8a496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normal: {fileID: 2100000, guid: 540b86e7f4718424a85d4eb17005d2b2, type: 2}
+  highLight: {fileID: 2100000, guid: d35902bd60d62d64a9e2926f016ad024, type: 2}
 --- !u!135 &135457832270391442
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class PolymerInfoDisplayer : MonoBehaviour {
 
-    private SelectMode selectMode = SelectMode.Atom;
-
-    [SerializeField]
-    private PolymerInfoItem[] polymerInfoItems; // protein-chain-residue-atom
-
     [Header("UIReference")]
     [SerializeField]
     private TextMesh proteinIdCodeText;
@@ -40,15 +35,6 @@ public class PolymerInfoDisplayer : MonoBehaviour {
     private TextMesh atomCoordinateText;
 
     #region Public Method
-
-    /// <summary>设置选取模式 </summary>
-    public void SetSelectMode(SelectMode selectMode) {
-        this.selectMode = selectMode;
-        polymerInfoItems[0].CanShow = true;
-        polymerInfoItems[1].CanShow = selectMode >= SelectMode.Chain; //恒为true
-        polymerInfoItems[2].CanShow = selectMode >= SelectMode.Residue;
-        polymerInfoItems[3].CanShow = selectMode >= SelectMode.Atom;
-    }
 
     /// <summary>Atom模式选取</summary>
     public void SetData(AtomDisplayer atomDisplayer) {

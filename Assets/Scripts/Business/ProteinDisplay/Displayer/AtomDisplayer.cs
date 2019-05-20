@@ -7,6 +7,11 @@ using ZCore;
 
 public class AtomDisplayer : MonoBehaviour, IInputClickHandler, IDisplayerSelected {
 
+    [SerializeField]
+    public Material normal;
+    [SerializeField]
+    public Material highLight;
+
     private void Start() {
         
     }
@@ -22,35 +27,36 @@ public class AtomDisplayer : MonoBehaviour, IInputClickHandler, IDisplayerSelect
     }
 
     public void OnInputClicked(InputClickedEventData eventData) {
-        Debug.Log("AtomClick");
-        SelectMode selectMode = SelectMode.Atom;//从数据获取SelectMode
-        if(selectMode == SelectMode.Atom) {
-            OnSelected();
-            //设置DisplayMode数据
+        PolymerSelectMode selectMode = CoreAPI.PostCommand<MainConsoleModule, GetSelectModeCommand, PolymerSelectMode>(new GetSelectModeCommand());
+        AminoacidDisplayer aminoacidDisplayer = transform.parent.GetComponent<AminoacidDisplayer>();
+        if (selectMode == PolymerSelectMode.Atom) {
+            CoreAPI.SendCommand<ProteinDisplayModule, SetSelectedDisplayerCommand>(new SetSelectedDisplayerCommand(this));
         }
         else {
-            AminoacidDisplayer aminoacidDisplayer = transform.parent.GetComponent<AminoacidDisplayer>();
             aminoacidDisplayer.OnInputClicked(eventData);
         }
     }
 
     public void OnSelected() {
         //设置高亮材质
+        if (this == null)
+            return;
+        AminoacidDisplayer aminoacidDisplayer = transform.parent.GetComponent<AminoacidDisplayer>();
+        aminoacidDisplayer.OnChildSelected();
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.sharedMaterial = highLight;
+        renderer.enabled = true;
     }
 
     public void OnUnSelected() {
         //取消高亮材质
+        if (this == null)
+            return;
+        AminoacidDisplayer aminoacidDisplayer = transform.parent.GetComponent<AminoacidDisplayer>();
+        aminoacidDisplayer.OnChildCancelSelected();
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.sharedMaterial = normal;
+        renderer.enabled = false;
     }
-
-
-
-    //private void OnMouseEnter() {
-    //    CoreAPI.SendCommand<ProteinDisplayModule, ShowInfoInBoardCommand>(new ShowInfoInBoardCommand(this));
-    //}
-
-    //private void OnMouseExit() {
-    //    CoreAPI.SendCommand<ProteinDisplayModule, ShowInfoInBoardCommand>(new ShowInfoInBoardCommand(null));
-    //}
-
 
 }

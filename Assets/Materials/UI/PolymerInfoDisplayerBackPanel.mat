@@ -71,7 +71,7 @@ Material:
     - _BorderLightOpaque: 0
     - _BorderLightUsesHoverColor: 1
     - _BorderMinValue: 0.1
-    - _BorderWidth: 0.2
+    - _BorderWidth: 0.7
     - _BorderWidthHorizontal: 0.048
     - _BorderWidthVertical: 0.1
     - _BumpScale: 1
@@ -85,7 +85,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DirectionalLight: 0
     - _DstBlend: 0
-    - _EdgeSmoothingValue: 0.007
+    - _EdgeSmoothingValue: 0.01
     - _EnableEmission: 0
     - _EnableHoverColorOpaqueOverride: 0
     - _EnableHoverColorOverride: 0

@@ -16,14 +16,16 @@ public class PdbLoaderController : Controller {
     }
 
     /// <summary>从本地加载PDB文件</summary>
-    public async void LoadLocalPdbFileAsync(Action completeCallback) {
+    public async void LoadLocalPdbFileAsync(Action<string> completeCallback) {
         byte[] data = await IOUtil.PickFile();
         ParsePdbData(data);
-        completeCallback?.Invoke();
+        PdbLoaderModel model = GetModel<PdbLoaderModel>();
+        completeCallback?.Invoke(model.ProteinData.ID);
     }
 
     /// <summary>从网络加载PDB文件 </summary>
     public void LoadNetworkPdbFile(string IDCode, Action completeCallback) {
+        Debug.Log(IDCode);
         PdbLoaderService service = GetService<PdbLoaderService>();
         StartCoroutine(service.DownloadPdbFile(
             IDCode, 
@@ -40,7 +42,7 @@ public class PdbLoaderController : Controller {
     }
 
     /// <summary>从本地加载默认的PDB文件 </summary>
-    public void LoadDefaultPdbFileCommand(string IDCode, Action completeCallback) {
+    public void LoadDefaultPdbFile(string IDCode, Action completeCallback) {
         PdbLoaderService service = GetService<PdbLoaderService>();
         StartCoroutine(service.LoadDefaultPdbFile(
             IDCode,
@@ -121,6 +123,8 @@ public class PdbLoaderController : Controller {
 
                     //原子相关部分
                     string atomName = record.Substring(12, 4).Trim(); //13-16
+                    if (atomName.ToLower().StartsWith("h"))
+                        continue; //若该原子是氢原子 则跳过
                     int atomSerial = int.Parse(record.Substring(6, 5).Trim()); //7-11
                     float x = float.Parse(record.Substring(30, 8).Trim()); //31-38
                     float y = float.Parse(record.Substring(38, 8).Trim()); //39-46
@@ -158,6 +162,9 @@ public class PdbLoaderController : Controller {
                 }
                 else if (title.StartsWith("CONECT")) { //非标准残基间的原子连接关系
 
+                }
+                else if (title.StartsWith("ENDMDL")) { //Model结束后跳出
+                    break;
                 }
             }
             centerPos = new Vector3((minPos.x + maxPos.x) / 2, (minPos.y + maxPos.y) / 2, (minPos.z + maxPos.z) / 2);

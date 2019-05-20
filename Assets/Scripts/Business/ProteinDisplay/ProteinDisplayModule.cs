@@ -5,20 +5,28 @@ using ZCore;
 
 public class ProteinDisplayModule : Module {
 
+    /// <summary>显示蛋白质模型 </summary>
     public void OnShowProteinCommand(ShowProteinCommand cmd) {
         GetController<ProteinDisplayController>().ShowProtein();
     }
 
+    /// <summary>显示DisplayView </summary>
     public void OnShowDisplayViewCommand(ShowDisplayViewCommand cmd) {
         GetController<ProteinDisplayController>().ShowDisplayView();
     }
 
-    public void OnShowInfoInBoardCommand(ShowInfoInBoardCommand cmd) {
-        GetController<ProteinDisplayController>().ShowInfoInBoard(cmd.AtomDisplayer);
+    /// <summary>设置选中的Displayer </summary>
+    public void OnSetSelectedDisplayerCommand(SetSelectedDisplayerCommand cmd) {
+        GetController<ProteinDisplayController>().SetSelectedDisplayer(cmd.Displayer);
     }
 
-    public void OnSetDisplayModeCommand(SetDisplayModeCommand cmd) {
-        GetController<ProteinDisplayController>().SetDisplayMode(cmd.DisplayMode);
+    public IDisplayerSelected OnGetSelectedDisplayerCommand(GetSelectedDisplayerCommand cmd) {
+        return GetController<ProteinDisplayController>().GetSelectedDisplayer();
+    }
+
+    /// <summary>设置PolymerBoard的Active </summary>
+    public void OnSetPolymerInfoDisplayerActiveCommand(SetPolymerInfoDisplayerActiveCommand cmd) {
+        GetController<ProteinDisplayController>().SetPolymerInfoDisplayerActive(cmd.Active);
     }
 
 }

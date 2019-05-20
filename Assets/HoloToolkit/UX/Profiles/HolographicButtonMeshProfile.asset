@@ -21,13 +21,13 @@ MonoBehaviour:
   - Name: Pressed
     ActiveState: 0
     StateColor: {r: 0.627451, g: 0.627451, b: 0.627451, a: 1}
-    StateValue: 0.4
+    StateValue: 0.5
     Offset: {x: 0, y: 0, z: 0}
     Scale: {x: 0.12, y: 0.12, z: 0.01}
   - Name: Targeted
     ActiveState: 1
     StateColor: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
-    StateValue: 0.4
+    StateValue: 0.5
     Offset: {x: 0, y: 0, z: 0}
     Scale: {x: 0.12, y: 0.12, z: 0.01}
   - Name: Interactive
@@ -39,7 +39,7 @@ MonoBehaviour:
   - Name: ObservationTargeted
     ActiveState: 3
     StateColor: {r: 0.36764705, g: 0.36764705, b: 0.36764705, a: 1}
-    StateValue: 0.4
+    StateValue: 0.5
     Offset: {x: 0, y: 0, z: 0}
     Scale: {x: 0.12, y: 0.12, z: 0.01}
   - Name: Observation

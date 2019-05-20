@@ -14,7 +14,7 @@ public class MainConsoleModel : Model {
     public DisplayMode DisplayMode { get; set; } = DisplayMode.BallStick;
 
     /// <summary>当前勾选的Select模式 </summary>
-    public SelectMode SelectMode { get; set; } = SelectMode.Atom;
+    public PolymerSelectMode SelectMode { get; set; } = PolymerSelectMode.Atom;
 
     public MainConsoleStateEnum State { get; set; } = MainConsoleStateEnum.Default;
 
@@ -24,5 +24,7 @@ public class MainConsoleModel : Model {
     public bool IsShowFps { get; set; } = true;
 
     public bool IsHelpDialogLaunched { get; set; } = false;
+
+    public bool IsOptionHelpDialogLaunched { get; set; } = false;
 
 }

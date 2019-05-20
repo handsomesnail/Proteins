@@ -8,9 +8,9 @@ using ZCore;
 public class PdbLoaderCommand : Command { }
 
 public class LoadLocalPdbFileCommand : PdbLoaderCommand {
-    public Action CompleteCallback { get; private set; }
+    public Action<string> CompleteCallback { get; private set; }
 
-    public LoadLocalPdbFileCommand(Action completeCallback) {
+    public LoadLocalPdbFileCommand(Action<string> completeCallback) {
         this.CompleteCallback = completeCallback;
     }
 }

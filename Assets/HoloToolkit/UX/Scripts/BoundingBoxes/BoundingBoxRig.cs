@@ -219,12 +219,20 @@ namespace HoloToolkit.Unity.UX
 
         public void Activate()
         {
+            #region frame update optimization
+            //激活之后再在update中计算
+            boxInstance.gameObject.Active(true);
+            #endregion
             InputManager.Instance.RaiseBoundingBoxRigActivated(gameObject);
             ShowRig = true;
         }
 
         public void Deactivate()
         {
+            #region frame update optimization
+            boxInstance.gameObject.Active(false);
+            //取消激活后在update中停止计算
+            #endregion
             InputManager.Instance.RaiseBoundingBoxRigDeactivated(gameObject);
             ShowRig = false;
         }
@@ -274,6 +282,9 @@ namespace HoloToolkit.Unity.UX
             }
 
             boxInstance.IsVisible = false;
+
+            //创建完成后取消激活
+            boxInstance.gameObject.Active(false);
         }
 
         private void Update()

@@ -19,7 +19,7 @@ namespace ZCore {
 
     public abstract class ViewBaseEventHandler : MonoBehaviour {
 
-        protected Delegate[] delegateList;
+        protected Delegate[] delegateList = new Delegate[] { };
 
         /// <summary>将序列化的UnityEvent转化为委托链</summary>
         internal static Delegate[] ConvertDelegateList(UnityEvent unityEvent) {

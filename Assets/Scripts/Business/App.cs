@@ -44,21 +44,27 @@ public class App : MonoBehaviour {
             GameObjectPoolRoot.SetParent(this.gameObject.transform);
         }
         Application.targetFrameRate = 60;
-        LoadData();
+        Init(); 
     }
 
 
-    private async void LoadData() {
+    private async void Init() {
         await PolymerModelAPI.LoadDataAsync();
         Debug.Log("加载PolymerModel完成");
-        //CoreAPI.SendCommand<MainConsoleModule, RegisterHoldHandlerCommand>(new RegisterHoldHandlerCommand());
-        //CoreAPI.SendCommand<MainConsoleModule, ShowMainConsoleCommand>(new ShowMainConsoleCommand());
-        //OnButtonClick();
+        CoreAPI.SendCommand<MainConsoleModule, RegisterHoldHandlerCommand>(new RegisterHoldHandlerCommand());
+        CoreAPI.SendCommand<MainConsoleModule, ShowMainConsoleCommand>(new ShowMainConsoleCommand());
+        StartCoroutine(LaunchHelpDialog()); 
     }
 
-    public async void OnButtonClick() {
-        CoreAPI.SendCommand<PdbLoaderModule, LoadDefaultPdbFileCommand>(new LoadDefaultPdbFileCommand("6dce", () => {
-            CoreAPI.SendCommand<ProteinDisplayModule, ShowProteinCommand>(new ShowProteinCommand());
+    private IEnumerator LaunchHelpDialog() {
+        yield return new WaitForSeconds(1.0f); //等待MainConsole载入完成
+        CoreAPI.SendCommand<MainConsoleModule, ShowHelpDialogCommand>(new ShowHelpDialogCommand());
+    }
+
+    [ContextMenu("Test")]
+    public void TestCombine() {
+        CoreAPI.SendCommand<PdbLoaderModule, LoadNetworkPdbFileCommand>(new LoadNetworkPdbFileCommand("2nc3", () => {
+            Debug.Log("ok");
         }));
     }
 

@@ -7,8 +7,14 @@ using ZCore;
 /// <summary>主控制台(可随时呼出的操作菜单)</summary>
 public class MainConsoleModule : Module {
 
+    /// <summary>注册导航事件呼起Console </summary>
     public void OnRegisterHoldHandlerCommand(RegisterHoldHandlerCommand cmd) {
         InputManager.Instance.AddGlobalListener(GetController<MainConsoleController>().gameObject);
+    }
+
+    /// <summary>注销呼起Console </summary>
+    public void OnUnRegisterHoldHandlerCommand(UnRegisterHoldHandlerCommand cmd) {
+        InputManager.Instance.RemoveGlobalListener(GetController<MainConsoleController>().gameObject);
     }
 
    /// <summary>显示主控制台</summary>
@@ -27,10 +33,13 @@ public class MainConsoleModule : Module {
     }
 
     /// <summary>获取当前Select模式 </summary>
-    public SelectMode OnGetSelectModeCommand(GetSelectModeCommand cmd) {
+    public PolymerSelectMode OnGetSelectModeCommand(GetSelectModeCommand cmd) {
         return GetController<MainConsoleController>().GetSelectMode();
     }
 
+    public void OnShowHelpDialogCommand(ShowHelpDialogCommand cmd) {
+        GetController<MainConsoleController>().OnClickHelpButton();
+    }
 
 
 

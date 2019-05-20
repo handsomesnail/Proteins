@@ -20,7 +20,7 @@ namespace PolymerModel.Data {
         public AminoacidType Type { get; private set; }
 
         /// <summary>是否是标准残基</summary>
-        public bool IsStandard { get; private set; }
+        public bool IsStandard { get; private set; } = true;
 
         /// <summary>氨基酸类型(中文)</summary>
         public string Chinese { get; private set; }

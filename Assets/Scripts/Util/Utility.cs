@@ -54,5 +54,18 @@ public static class Utility {
         }
     }
 
+    /// <summary>合并该游戏物体下的所有Mesh并返回合并后的mesh </summary>
+    public static Mesh CombineChildsMesh(this Transform parent) {
+        MeshFilter[] meshFilters = parent.GetComponentsInChildren<MeshFilter>();
+        CombineInstance[] combineInstances = new CombineInstance[meshFilters.Length]; //排除自己
+        for (int i = 0; i < meshFilters.Length; i++) {
+            combineInstances[i].mesh = meshFilters[i].sharedMesh;
+            combineInstances[i].transform = meshFilters[i].transform.localToWorldMatrix; 
+        }
+        Mesh combinedMesh = new Mesh();  
+        combinedMesh.CombineMeshes(combineInstances); 
+        return combinedMesh;
+    }
+
 
 }

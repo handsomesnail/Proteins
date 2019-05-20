@@ -11,7 +11,7 @@ namespace ZCore {
     //Controller名 ExampleController
     //Model名 ExampleModel
     //View名 ExampleView
-    //Service名 ServiceView
+    //Service名 ExampleService
     //Command名 xxxxxCommand(继承自ExampleCommand)
     //注意：
     //1.每个模块内Example要一致，框架强制要求并根据名称字符串匹配

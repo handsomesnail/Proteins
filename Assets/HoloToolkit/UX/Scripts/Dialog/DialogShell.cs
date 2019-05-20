@@ -206,6 +206,7 @@ namespace HoloToolkit.UX.Dialog
 
             for (pos = 0; pos < text.Length; pos = next)
             {
+
                 int endOfLine = text.IndexOf(Environment.NewLine, pos, StringComparison.Ordinal);
 
                 if (endOfLine == -1)

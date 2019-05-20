@@ -16,5 +16,6 @@ namespace HoloToolkit.UX.Dialog
         Yes = 16,
         No = 32,
         OK = 64,
+        Download = 128,
     }
 }

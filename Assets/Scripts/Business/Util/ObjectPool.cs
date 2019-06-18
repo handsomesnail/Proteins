@@ -58,16 +58,14 @@ public static class ObjectPool {
 
 /// <summary>对象池(Type作为泛型参数 相当于ObjectPool的Key)</summary>
 public static class ObjectPool<T> where T : class, IPool {
-
-    public static int Count {//当前容量
+    /// <summary>对象池当前容量</summary>
+    public static int Count {
         get { return ObjectsInPool.Count; }
     }
-
-    private static int MaxCapacity = 10;//默认最大容量
-
+    /// <summary>默认最大容量</summary>
+    private static int MaxCapacity = 10;
     private static Stack<T> ObjectsInPool;
-
-    /// <summary>可以手动初始化</summary>
+    /// <summary>初始化</summary>
     public static void Init(int maxCapacity) {
         MaxCapacity = maxCapacity;
         ObjectsInPool = new Stack<T>();
@@ -75,12 +73,10 @@ public static class ObjectPool<T> where T : class, IPool {
     public static void Init() {
         Init(2);
     }
-
     /// <summary>ctor</summary>
     static ObjectPool() {
         Init();
     }
-
     /// <summary>向对象池中添加游戏对象</summary>
     public static void StoreObject(T _Object) {
         if (ObjectsInPool.Count >= MaxCapacity) {
@@ -94,7 +90,6 @@ public static class ObjectPool<T> where T : class, IPool {
         }
         ObjectsInPool.Push(_Object);
     }
-
     public static void StoreGameObject(GameObject _GameObject) {
         if (_GameObject == null) {
             throw new ObjectPoolException("The gameObject couldn't be null reference");
@@ -107,7 +102,6 @@ public static class ObjectPool<T> where T : class, IPool {
         _GameObject.SetActive(false);
         _GameObject.transform.SetParent(App.Instance.GameObjectPoolRoot);
     }
-
     /// <summary>从对象池中取出游戏对象</summary>
     public static bool TryGetObject(out T _Object) {
         if (ObjectsInPool.Count == 0) {
@@ -124,7 +118,6 @@ public static class ObjectPool<T> where T : class, IPool {
             return TryGetObject(out _Object);
         }
     }
-
     public static bool TryGetGameObject(out GameObject _GameObject) {
         if (!typeof(T).IsSubclassOf(typeof(MonoBehaviour))) {
             throw new ObjectPoolException(string.Format("{0} couldn't be attached to gameObject", typeof(T).Name));
